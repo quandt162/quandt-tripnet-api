@@ -41,8 +41,8 @@ public class TourPostController {
 	
 	@PostMapping("post")
 	public ResponseEntity<Void> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {
-        boolean flag = commonService.add(TourPost);
-        if (flag == false) {
+        boolean flagTourPost = commonService.add(TourPost);
+        if (flagTourPost == false) {
         	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         HttpHeaders headers = new HttpHeaders();
@@ -55,7 +55,9 @@ public class TourPostController {
 	public ResponseEntity<TourPost> updateTourPost(@RequestBody TourPost TourPost) {
 		commonService.update(TourPost);
 		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
-	}public TourPostController() {
+	}
+	
+	public TourPostController() {
 		// TODO Auto-generated constructor stub
 	}
 	

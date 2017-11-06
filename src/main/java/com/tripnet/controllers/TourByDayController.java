@@ -39,8 +39,8 @@ public class TourByDayController {
 	}
 	
 	
-	@PostMapping("day")
-	public ResponseEntity<Void> addTourByDay(@RequestBody TourByDay TourByDay, UriComponentsBuilder builder) {
+	@PostMapping("{id}/day")
+	public ResponseEntity<Void> addTourByDay(@RequestBody TourByDay TourByDay, UriComponentsBuilder builder,@PathVariable("id") Integer id) {
         boolean flag = commonService.add(TourByDay);
         if (flag == false) {
         	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -50,8 +50,8 @@ public class TourByDayController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("day")
-	public ResponseEntity<TourByDay> updateTourByDay(@RequestBody TourByDay TourByDay) {
+	@PutMapping("{id}/day")
+	public ResponseEntity<TourByDay> updateTourByDay(@RequestBody TourByDay TourByDay,@PathVariable("id") Integer id) {
 		commonService.update(TourByDay);
 		return new ResponseEntity<TourByDay>(TourByDay, HttpStatus.OK);
 	}

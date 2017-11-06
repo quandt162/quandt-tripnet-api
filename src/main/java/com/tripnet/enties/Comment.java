@@ -8,33 +8,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-/*
- * *Author: QuanDT
- */
-@SuppressWarnings("unused")
+
 @Entity
-@Table(name = "tour_by_day")
-public class TourByDay  implements Serializable{
+@Table(name = "comment")
+public class Comment  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Id")
-	private int id;
-	@Column(name = "Tour_Post_ID")
+	private int Id;
+	@Column(name = "Content")
+	private String content;
+	@Column(name = "tour_Post_ID")
 	private int tourPostID;
-	@Column(name = "Day")
-	private int day;
-	@Column(name = "Description")
-	private String Description;
+	@Column(name = "comment_By_ID")
+	private int commentByID;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
 	public int getId() {
-		return id;
+		return Id;
 	}
 	public void setId(int id) {
-		this.id = id;
+		Id = id;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public int getTourPostID() {
 		return tourPostID;
@@ -42,17 +45,11 @@ public class TourByDay  implements Serializable{
 	public void setTourPostID(int tourPostID) {
 		this.tourPostID = tourPostID;
 	}
-	public int getDay() {
-		return day;
+	public int getCommentByID() {
+		return commentByID;
 	}
-	public void setDay(int day) {
-		this.day = day;
-	}
-	public String getDescription() {
-		return Description;
-	}
-	public void setDescription(String description) {
-		Description = description;
+	public void setCommentByID(int commentByID) {
+		this.commentByID = commentByID;
 	}
 	public int getDeleted() {
 		return deleted;

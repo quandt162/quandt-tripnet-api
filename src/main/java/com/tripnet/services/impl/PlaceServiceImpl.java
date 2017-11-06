@@ -1,40 +1,43 @@
 package com.tripnet.services.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.tripnet.dao.ICommonDAO;
-import com.tripnet.enties.TourByDayDetails;
+import com.tripnet.dao.IPlaceDAO;
+import com.tripnet.enties.Place;
 import com.tripnet.services.ICommonService;
 
-/*
- * *Author: QuanDT
- */
 @Service
-public class TourByDayDetailServiceImpl implements ICommonService<TourByDayDetails> {
+public class PlaceServiceImpl implements ICommonService<Place>{
 	@Autowired
-	private ICommonDAO<TourByDayDetails> commonDAO;
-	
+	private ICommonDAO<Place> commonDAO;
+	@Autowired
+	private IPlaceDAO<Place> placeDAO;
 	@Override
-	public TourByDayDetails getOneById(int objectId) {
+	public Place getOneById(int objectId) {
 		return commonDAO.getOneById(objectId);
 	}
 
 	@Override
-	public List<TourByDayDetails> getAll() {
+	public List<Place> getAll() {
 		return commonDAO.getAll();
 	}
 
 	@Override
-	public boolean add(TourByDayDetails object) {
-		if(object != null) {
+	public boolean add(Place object) {
+		if (placeDAO.isExit(object.getName(), object.getRegion())) {
+			return false;
+		} else {
 			commonDAO.add(object);
 			return true;
-		}else return true;
+		}
 	}
 
 	@Override
-	public void update(TourByDayDetails object) {
+	public void update(Place object) {
 		if(object != null) commonDAO.update(object);
 	}
 
