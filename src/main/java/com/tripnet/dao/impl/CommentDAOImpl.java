@@ -6,15 +6,14 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tripnet.dao.IComment;
+import com.tripnet.dao.ICommentDAO;
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.enties.Comment;
-import com.tripnet.enties.TourPost;
-
+import com.tripnet.enties.Marking;
 
 @Transactional
 @Repository
-public class CommentDAOImpl implements ICommonDAO<Comment>{
+public class CommentDAOImpl implements ICommonDAO<Comment>, ICommentDAO<Comment>{
 	
 	@PersistenceContext	
 	private EntityManager entityManager;
@@ -38,7 +37,7 @@ public class CommentDAOImpl implements ICommonDAO<Comment>{
 	@Override
 	public void update(Comment object) {
 		if(object != null) {
-			Comment c = new Comment();
+			Comment c = getOneById(object.getId());
 			c.setContent(object.getContent());
 			c.setCreateTime(object.getCreateTime());
 			c.setDeleted(object.getDeleted());
@@ -50,6 +49,12 @@ public class CommentDAOImpl implements ICommonDAO<Comment>{
 	public void delete(int objectId) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Comment> getAllCommentByTour(int tourPostID) {
+		String hql = "FROM Comment AS c WHERE c.deleted = ? AND c.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, tourPostID).getResultList();
 	}
 
 }

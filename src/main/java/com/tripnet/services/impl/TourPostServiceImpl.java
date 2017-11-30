@@ -9,12 +9,13 @@ import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.ITourPostDAO;
 import com.tripnet.enties.TourPost;
 import com.tripnet.services.ICommonService;
+import com.tripnet.services.ITourPostService;
 
 /*
  * *Author: QuanDT
  */
 @Service
-public class TourPostServiceImpl implements ICommonService<TourPost> {
+public class TourPostServiceImpl implements ICommonService<TourPost>,ITourPostService<TourPost> {
 	
 	@Autowired 
 	private ICommonDAO<TourPost> commonDAO;
@@ -24,8 +25,7 @@ public class TourPostServiceImpl implements ICommonService<TourPost> {
 	
 	@Override
 	public TourPost getOneById(int objectId) {
-		TourPost obj = commonDAO.getOneById(objectId);
-		return obj;
+		return commonDAO.getOneById(objectId);
 	}
 
 	@Override
@@ -53,5 +53,11 @@ public class TourPostServiceImpl implements ICommonService<TourPost> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public TourPost getAllTourPostByTitle(String title) {
+		return tourPostDAO.getAllTourPostByTitle(title);
+	}
+
 
 }

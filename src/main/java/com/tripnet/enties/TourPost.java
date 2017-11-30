@@ -28,15 +28,24 @@ public class TourPost implements Serializable {
 	@Column(name = "Duration")
 	private int duration;
 	@Column(name = "Description")
-	private String Description;
+	private String description;
 	@Column(name = "Tour_Article_Title")
 	private String tourArticleTitle;
+	@Column(name = "Post_View_Number")
+	private String postViewNumber;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
-	@Column(name = "Vehicle")
-	private String Vehicle;
+	@Column(name = "Updated_Time")
+	private String updateTime;
+	
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
 	public int getId() {
 		return id;
 	}
@@ -68,10 +77,10 @@ public class TourPost implements Serializable {
 		this.duration = duration;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		description = description;
 	}
 	public String getTourArticleTitle() {
 		return tourArticleTitle;
@@ -91,11 +100,10 @@ public class TourPost implements Serializable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getVehicle() {
-		return Vehicle;
+	public String getPostViewNumber() {
+		return postViewNumber;
 	}
-	public void setVehicle(String vehicle) {
-		Vehicle = vehicle;
+	public void setPostViewNumber(String postViewNumber) {
+		this.postViewNumber = postViewNumber;
 	}
-	
 }

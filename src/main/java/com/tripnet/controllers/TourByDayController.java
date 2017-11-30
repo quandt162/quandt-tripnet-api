@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tripnet.enties.TourByDay;
 import com.tripnet.services.ICommonService;
+import com.tripnet.services.ITourByDayService;
 /*
  * *Author: QuanDT
  */
@@ -25,16 +26,18 @@ import com.tripnet.services.ICommonService;
 public class TourByDayController {
 	@Autowired
 	private ICommonService<TourByDay> commonService;
+	@Autowired
+	private ITourByDayService<TourByDay> tourByDayService;
 	
-	@GetMapping("{id}/day/{day}")
-	public ResponseEntity<TourByDay> getTourByDayById(@PathVariable("id") Integer id,@PathVariable("day") Integer day) {
-		TourByDay TourByDay = commonService.getOneById(id);
-		return new ResponseEntity<TourByDay>(TourByDay, HttpStatus.OK);
+	@GetMapping("{postID}/day/{day}")
+	public ResponseEntity<TourByDay> getTourByDayById(@PathVariable("postID") Integer postID,@PathVariable("day") Integer day) {
+		TourByDay t  = tourByDayService.getTourByDayByTourPost(postID, day);
+		return new ResponseEntity<TourByDay>(t, HttpStatus.OK);
 	}
 	
-	@GetMapping("day/get-all")
-	public ResponseEntity<List<TourByDay>> getAllTourByDays() {
-		List<TourByDay> list = commonService.getAll();
+	@GetMapping("{postID}/get-all")
+	public ResponseEntity<List<TourByDay>> getAllTourByDays(@PathVariable("postID") Integer postID) {
+		List<TourByDay> list = tourByDayService.getAllTourByDayByTourPost(postID);
 		return new ResponseEntity<List<TourByDay>>(list, HttpStatus.OK);
 	}
 	

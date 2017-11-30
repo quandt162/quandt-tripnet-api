@@ -31,20 +31,24 @@ public class PlaceDAOImpl implements ICommonDAO<Place>, IPlaceDAO<Place>{
 
 	@Override
 	public void add(Place object) {
-		entityManager.persist(object);
+		if(null != object) {
+			entityManager.persist(object);
+		}
 	}
 
 	@Override
 	public void update(Place object) {
-		Place p = new Place();
-		p.setCreated_Time(object.getCreated_Time());
-		p.setDeleted(object.getDeleted());
-		p.setDescription(object.getDescription());
-		p.setName(object.getName());
-		p.setRegion(object.getRegion());
-		p.setType(object.getType());
-		
-		entityManager.flush();
+		if(null != object) {
+			Place p = getOneById(object.getId());
+			p.setCreated_Time(object.getCreated_Time());
+			p.setDeleted(object.getDeleted());
+			p.setDescription(object.getDescription());
+			p.setName(object.getName());
+			p.setRegion(object.getRegion());
+			p.setType(object.getType());
+			
+			entityManager.flush();
+		}
 	}
 
 	@Override
@@ -60,5 +64,15 @@ public class PlaceDAOImpl implements ICommonDAO<Place>, IPlaceDAO<Place>{
 		return count > 0 ? true : false;
 		
 	}
+
+//	@Override
+//	public Place getPlaceByPostTitle(String name) {
+//		String hql = "FROM Place AS p WHERE p.name = ? and p.deleted = ?";
+//		List<Place> listP = entityManager.createQuery(hql).setParameter(1, name).setParameter(2, 0).getResultList();
+//		if(listP.isEmpty()) {
+//			return null;
+//		}
+//		return (Place)listP.get(0);
+//	}
 	
 }

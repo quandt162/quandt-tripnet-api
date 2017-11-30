@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tripnet.enties.Comment;
+import com.tripnet.services.ICommentService;
 import com.tripnet.services.ICommonService;
 /*
  * *Author: QuanDT
@@ -25,15 +26,18 @@ public class CommentController {
 	@Autowired
 	private ICommonService<Comment> commonService;
 	
+	@Autowired
+	private ICommentService<Comment> commentService;
+	
 	@GetMapping("{postid}/comment/cid")
 	public ResponseEntity<Comment> getCommentById(@PathVariable("postid") Integer postid,@PathVariable("cid") Integer cid) {
 		Comment Comment = commonService.getOneById(cid);
 		return new ResponseEntity<Comment>(Comment, HttpStatus.OK);
 	}
 	
-	@GetMapping("{postid}/comment/get_all")
-	public ResponseEntity<List<Comment>> getAllComments() {
-		List<Comment> list = commonService.getAll();
+	@GetMapping("{postid}/comment/get-all")
+	public ResponseEntity<List<Comment>> getAllComments(@PathVariable("postid") Integer postid) {
+		List<Comment> list = commentService.getAllCommentByTourPostID(postid);
 		return new ResponseEntity<List<Comment>>(list, HttpStatus.OK);
 	}
 	

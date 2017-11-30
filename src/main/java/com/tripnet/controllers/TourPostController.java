@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tripnet.enties.TourPost;
 import com.tripnet.services.ICommonService;
+import com.tripnet.services.ITourPostService;
 /*
  * *Author: QuanDT
  */
@@ -25,6 +26,8 @@ import com.tripnet.services.ICommonService;
 public class TourPostController {
 	@Autowired
 	private ICommonService<TourPost> commonService;
+	@Autowired
+	private ITourPostService<TourPost> tourPostService;
 	
 	@GetMapping("post/{id}")
 	public ResponseEntity<TourPost> getTourPostById(@PathVariable("id") Integer id) {
@@ -32,7 +35,13 @@ public class TourPostController {
 		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
 	}
 	
-	@GetMapping("post/get_all")
+	@GetMapping("post/title/{title}")
+	public ResponseEntity<TourPost> getAllTourPostByTitle(@PathVariable("title") String title) {
+		TourPost TourPost = tourPostService.getAllTourPostByTitle(title);
+		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
+	}
+	
+	@GetMapping("post/get-all")
 	public ResponseEntity<List<TourPost>> getAllTourPosts() {
 		List<TourPost> list = commonService.getAll();
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
@@ -40,14 +49,14 @@ public class TourPostController {
 	
 	
 	@PostMapping("post")
-	public ResponseEntity<Void> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {
+	public ResponseEntity<Integer> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {
         boolean flagTourPost = commonService.add(TourPost);
         if (flagTourPost == false) {
-        	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        	return new ResponseEntity<Integer>(HttpStatus.CONFLICT);
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/article/{id}").buildAndExpand(TourPost.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/article/{id}").buildAndExpand(TourPost.getId()).toUri());
+        return new ResponseEntity<Integer>(TourPost.getId(), HttpStatus.CREATED);
 	}
 	
 
@@ -60,11 +69,5 @@ public class TourPostController {
 	public TourPostController() {
 		// TODO Auto-generated constructor stub
 	}
-	
-//	public static void main(String[] args) {
-//		List<TourPost> list = commonService.getAll();
-//		for (TourPost tourPost : list) {
-//			tourPost.toString();
-//		}
-//	}
+
 }

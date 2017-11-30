@@ -24,12 +24,40 @@ public class TourByDay  implements Serializable{
 	private int tourPostID;
 	@Column(name = "Day")
 	private int day;
+	@Column(name = "Place_ID")
+	private int placeID;
 	@Column(name = "Description")
-	private String Description;
+	private String description;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
+	@Column(name = "Note")
+	private String note;
+	@Column(name = "Food")
+	private String food;
+	@Column(name = "Hotel")
+	private String hotel;
+	@Column(name = "Updated_Time")
+	private String updateTime;
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public String getFood() {
+		return food;
+	}
+	public void setFood(String food) {
+		this.food = food;
+	}
+	public String getHotel() {
+		return hotel;
+	}
+	public void setHotel(String hotel) {
+		this.hotel = hotel;
+	}
 	public int getId() {
 		return id;
 	}
@@ -49,10 +77,10 @@ public class TourByDay  implements Serializable{
 		this.day = day;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		description = description;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -66,5 +94,10 @@ public class TourByDay  implements Serializable{
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
 }

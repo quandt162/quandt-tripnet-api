@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * *Author: QuanDT
  */
 @Entity
-@Table(name = "tour_posts")
+@Table(name = "share")
 public class Share implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

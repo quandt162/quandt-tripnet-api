@@ -9,9 +9,10 @@ import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.IPlaceDAO;
 import com.tripnet.enties.Place;
 import com.tripnet.services.ICommonService;
+import com.tripnet.services.IPlaceService;
 
 @Service
-public class PlaceServiceImpl implements ICommonService<Place>{
+public class PlaceServiceImpl implements ICommonService<Place>,IPlaceService<Place>{
 	@Autowired
 	private ICommonDAO<Place> commonDAO;
 	@Autowired
@@ -46,5 +47,11 @@ public class PlaceServiceImpl implements ICommonService<Place>{
 		// TODO Auto-generated method stub
 		
 	}
+
+//	@Override
+//	public Place getPlaceByPostTitle(String postTitle) {
+//		return placeDAO.getPlaceByPostTitle(postTitle);
+//	}
+//
 
 }
