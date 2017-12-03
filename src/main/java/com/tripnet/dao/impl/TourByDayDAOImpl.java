@@ -50,7 +50,9 @@ public class TourByDayDAOImpl implements ICommonDAO<TourByDay>, ITourByDayDAO<To
 			tbd.setUpdateTime(object.getUpdateTime());
 			tbd.setFood(object.getFood());
 			tbd.setHotel(object.getHotel());
-			tbd.setNote(object.getNote());
+			tbd.setPlaceID(object.getPlaceID());
+			tbd.setPlaceDetail(object.getPlaceDetail());
+			tbd.setVehicle(object.getVehicle());
 			entityManager.flush();
 		}
 	}

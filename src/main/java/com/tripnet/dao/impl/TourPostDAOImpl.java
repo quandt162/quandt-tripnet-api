@@ -54,6 +54,8 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 			tp.setTourArticleTitle(object.getTourArticleTitle());
 			tp.setUpdateTime(object.getUpdateTime());
 			tp.setPostViewNumber(object.getPostViewNumber());
+			tp.setNote(object.getNote());
+			tp.setPrepare(object.getPrepare());
 			entityManager.flush();	
 		}
 	}
