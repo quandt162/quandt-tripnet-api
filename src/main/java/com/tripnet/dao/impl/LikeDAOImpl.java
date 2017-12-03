@@ -11,36 +11,37 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.ILikeDAO;
 import com.tripnet.enties.Comment;
-import com.tripnet.enties.Like;
+import com.tripnet.enties.Likes;
 
 @Transactional
 @Repository
-public class LikeDAOImpl implements ICommonDAO<Like>, ILikeDAO<Like>{
+public class LikeDAOImpl implements ICommonDAO<Likes>, ILikeDAO<Likes>{
 	@PersistenceContext	
 	private EntityManager entityManager;
 	
 	@Override
-	public Like getOneById(int objectId) {
-		return  entityManager.find(Like.class, objectId);
+	public Likes getOneById(int objectId) {
+		return  entityManager.find(Likes.class, objectId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Like> getAll() {
-		String hql = "FROM Like AS l WHERE l.deleted = ?";
+	public List<Likes> getAll() {
+		String hql = "FROM Likes AS l WHERE l.deleted = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
 	}
 
 	@Override
-	public void add(Like object) {
+	public void add(Likes object) {
 		entityManager.persist(object);
 	}
 
 	@Override
-	public void update(Like object) {
+	public void update(Likes object) {
 		if(null != object) {
-			Like l = getLike(object.getTourPostID(), object.getLikeByID());
+			Likes l = getOneById(object.getId());
 			l.setDeleted(object.getDeleted());
+			l.setCreateTime(object.getCreateTime());
 			entityManager.flush();
 		}
 	}
@@ -51,21 +52,10 @@ public class LikeDAOImpl implements ICommonDAO<Like>, ILikeDAO<Like>{
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Like> getAllLikeByTourPostID(int tourPostID) {
-		String hql = "FROM Like AS l WHERE l.deleted = ? AND l.tourPostID = ?";
+	public List<Likes> getAllLikeByTourPostID(int tourPostID) {
+		String hql = "FROM Likes AS l WHERE l.deleted = ? AND l.tourPostID = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,tourPostID ).getResultList();
-	}
-
-	@Override
-	public Like getLike(int tourID, int accountID) {
-		String hql = "FROM Like AS l WHERE l.tourPostID = ? AND  l.likeByID = ?";
-		List<Like> result = entityManager.createQuery(hql).setParameter(1,tourID ).setParameter(2,accountID ).getResultList();
-		if(result.isEmpty()) {
-			return null;
-		}
-		return (Like)result.get(0);
 	}
 
 }

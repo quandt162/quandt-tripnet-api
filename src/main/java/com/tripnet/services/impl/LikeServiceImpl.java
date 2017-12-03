@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.ILikeDAO;
-import com.tripnet.enties.Like;
+import com.tripnet.enties.Likes;
 import com.tripnet.services.ICommonService;
 import com.tripnet.services.ILikesService;
 
@@ -13,29 +13,29 @@ import com.tripnet.services.ILikesService;
  * *Author: QuanDT
  */
 @Service
-public class LikeServiceImpl implements ICommonService<Like>, ILikesService<Like> {
+public class LikeServiceImpl implements ICommonService<Likes>, ILikesService<Likes> {
 	@Autowired 
-	private ICommonDAO<Like> commonDAO;
+	private ICommonDAO<Likes> commonDAO;
 	@Autowired 
-	private ILikeDAO<Like> likeDAO;
+	private ILikeDAO<Likes> likeDAO;
 	@Override
-	public Like getOneById(int objectId) {
+	public Likes getOneById(int objectId) {
 		return commonDAO.getOneById(objectId);
 	}
 
 	@Override
-	public List<Like> getAll() {
+	public List<Likes> getAll() {
 		return commonDAO.getAll();
 	}
 
 	@Override
-	public boolean add(Like object) {
+	public boolean add(Likes object) {
 		commonDAO.add(object);
 		return true;
 	}
 
 	@Override
-	public void update(Like object) {
+	public void update(Likes object) {
 		if(object != null) {
 			commonDAO.update(object);
 		}
@@ -48,7 +48,7 @@ public class LikeServiceImpl implements ICommonService<Like>, ILikesService<Like
 	}
 
 	@Override
-	public List<Like> getAllLikeByTourPostID(int tourPostID) {
+	public List<Likes> getAllLikeByTourPostID(int tourPostID) {
 		return likeDAO.getAllLikeByTourPostID(tourPostID);
 	}
 

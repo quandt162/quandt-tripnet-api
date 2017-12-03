@@ -54,6 +54,8 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 			tp.setTourArticleTitle(object.getTourArticleTitle());
 			tp.setUpdateTime(object.getUpdateTime());
 			tp.setPostViewNumber(object.getPostViewNumber());
+			tp.setNote(object.getNote());
+			tp.setPrepare(object.getPrepare());
 			entityManager.flush();	
 		}
 	}
@@ -70,41 +72,7 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 		int count = entityManager.createQuery(hql).setParameter(1, title).getResultList().size();
 		return count > 0 ? true : false;
 	}
+	
+	
 
-	@Override
-	public List<TourPost> getAllTourPostByAccountId(int accountID) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.accountID = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, accountID).getResultList();
-	}
-
-
-	@Override
-	public List<TourPost> getAllTourPostByAccountName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TourPost> getAllTourPostByDuration(int duration) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.duration = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, duration).getResultList();
-	}
-
-	@Override
-	public List<TourPost> getAllTourPostByPlace(String place1, String place2) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.place1 = ? OR  tp.place2 = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, place1).setParameter(3, place2).getResultList();
-	}
-
-	@Override
-	public TourPost getAllTourPostByTitle(String title) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.tourArticleTitle =?";
-		List<TourPost> list = entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, title).getResultList();
-		
-		if(list.isEmpty()) {
-			return null;
-		}
-		return (TourPost)list.get(0);
-				
-	}
 }
