@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.tripnet.enties.Likes;
+import com.tripnet.enties.Like;
 import com.tripnet.services.ICommonService;
 import com.tripnet.services.ILikesService;
 /*
@@ -26,25 +26,25 @@ import com.tripnet.services.ILikesService;
 @RequestMapping("tours/post")
 public class LikeController {
 	@Autowired
-	private ICommonService<Likes> commonService;
+	private ICommonService<Like> commonService;
 	@Autowired
-	private ILikesService<Likes> likeService;
+	private ILikesService<Like> likeService;
 	
-	@GetMapping("{postid}/like/cid")
-	public ResponseEntity<Likes> getLikeById(@PathVariable("postid") Integer postid,@PathVariable("cid") Integer cid) {
-		Likes Like = commonService.getOneById(cid);
-		return new ResponseEntity<Likes>(Like, HttpStatus.OK);
+	@GetMapping("{postid}/like/{cid}")
+	public ResponseEntity<Like> getLikeById(@PathVariable("postid") Integer postid,@PathVariable("cid") Integer cid) {
+		Like Like = commonService.getOneById(cid);
+		return new ResponseEntity<Like>(Like, HttpStatus.OK);
 	}
 	
 	@GetMapping("{postid}/like/get-all")
-	public ResponseEntity<List<Likes>> getAllLikes(@PathVariable("postid") Integer postid) {
-		List<Likes> list = likeService.getAllLikeByTourPostID(postid);
-		return new ResponseEntity<List<Likes>>(list, HttpStatus.OK);
+	public ResponseEntity<List<Like>> getAllLikes(@PathVariable("postid") Integer postid) {
+		List<Like> list = likeService.getAllLikeByTourPostID(postid);
+		return new ResponseEntity<List<Like>>(list, HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("{postid}/Like")
-	public ResponseEntity<Void> addLike(@RequestBody Likes Like, UriComponentsBuilder builder,@PathVariable("postid") Integer postid) {
+	@PostMapping("/{postid}/Like")
+	public ResponseEntity<Void> addLike(@RequestBody Like Like, UriComponentsBuilder builder,@PathVariable("postid") Integer postid) {
         boolean flagLike = commonService.add(Like);
         if (flagLike == false) {
         	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -55,10 +55,10 @@ public class LikeController {
 	}
 	
 
-	@PutMapping("{postid}/Like")
-	public ResponseEntity<Likes> updateLike(@RequestBody Likes Like,@PathVariable("postid") Integer postid) {
+	@PutMapping("/{postid}/Like")
+	public ResponseEntity<Like> updateLike(@RequestBody Like Like,@PathVariable("postid") Integer postid) {
 		commonService.update(Like);
-		return new ResponseEntity<Likes>(Like, HttpStatus.OK);
+		return new ResponseEntity<Like>(Like, HttpStatus.OK);
 	}
 	
 	public LikeController() {

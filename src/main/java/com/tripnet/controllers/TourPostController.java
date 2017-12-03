@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tripnet.enties.TourPost;
 import com.tripnet.services.ICommonService;
+import com.tripnet.services.ITourPostService;
 /*
  * *Author: QuanDT
  */
@@ -25,10 +26,18 @@ import com.tripnet.services.ICommonService;
 public class TourPostController {
 	@Autowired
 	private ICommonService<TourPost> commonService;
+	@Autowired
+	private ITourPostService<TourPost> tourPostService;
 	
 	@GetMapping("post/{id}")
 	public ResponseEntity<TourPost> getTourPostById(@PathVariable("id") Integer id) {
 		TourPost TourPost = commonService.getOneById(id);
+		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
+	}
+	
+	@GetMapping("post/title/{title}")
+	public ResponseEntity<TourPost> getAllTourPostByTitle(@PathVariable("title") String title) {
+		TourPost TourPost = tourPostService.getAllTourPostByTitle(title);
 		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
 	}
 	
@@ -43,8 +52,10 @@ public class TourPostController {
 	public ResponseEntity<Integer> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {
         boolean flagTourPost = commonService.add(TourPost);
         if (flagTourPost == false) {
-        	return new ResponseEntity<Integer>(HttpStatus.NOT_ACCEPTABLE);
+        	return new ResponseEntity<Integer>(HttpStatus.CONFLICT);
         }
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/article/{id}").buildAndExpand(TourPost.getId()).toUri());
         return new ResponseEntity<Integer>(TourPost.getId(), HttpStatus.CREATED);
 	}
 	

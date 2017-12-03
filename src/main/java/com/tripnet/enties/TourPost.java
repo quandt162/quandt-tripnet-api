@@ -19,7 +19,7 @@ public class TourPost implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Id")
 	private int id;
-	@Column(name = "Account_ID")
+	@Column(name = "Acount_ID")
 	private int accountID;
 	@Column(name = "Start_Place_ID")
 	private int startPlaceID;
@@ -29,10 +29,6 @@ public class TourPost implements Serializable {
 	private int duration;
 	@Column(name = "Description")
 	private String description;
-	@Column(name = "Note")
-	private String note;
-	@Column(name = "Prepare")
-	private String prepare;
 	@Column(name = "Tour_Article_Title")
 	private String tourArticleTitle;
 	@Column(name = "Post_View_Number")
@@ -43,6 +39,7 @@ public class TourPost implements Serializable {
 	private String createTime;
 	@Column(name = "Updated_Time")
 	private String updateTime;
+	
 	public String getUpdateTime() {
 		return updateTime;
 	}
@@ -54,18 +51,6 @@ public class TourPost implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
-	public String getPrepare() {
-		return prepare;
-	}
-	public void setPrepare(String prepare) {
-		this.prepare = prepare;
 	}
 	public int getAccountID() {
 		return accountID;
@@ -95,7 +80,7 @@ public class TourPost implements Serializable {
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		description = description;
 	}
 	public String getTourArticleTitle() {
 		return tourArticleTitle;
