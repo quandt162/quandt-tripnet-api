@@ -1,20 +1,18 @@
 package com.tripnet.enties;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 /*
  * *Author: QuanDT
  */
-@SuppressWarnings("unused")
 @Entity
-@Table(name = "tour_by_day")
-public class TourByDay  implements Serializable{
+@Table(name = "report_tour_post")
+public class ReportTourPost {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,42 +20,17 @@ public class TourByDay  implements Serializable{
 	private int id;
 	@Column(name = "Tour_Post_ID")
 	private int tourPostID;
-	@Column(name = "Day")
-	private int day;
-	@Column(name = "Place_ID")
-	private int placeID;
+	@Column(name = "Reported_By")
+	private int reportedBy;
 	@Column(name = "Description")
 	private String description;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
-	@Column(name = "Note")
-	private String note;
-	@Column(name = "Food")
-	private String food;
-	@Column(name = "Hotel")
-	private String hotel;
 	@Column(name = "Updated_Time")
 	private String updateTime;
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
-	public String getFood() {
-		return food;
-	}
-	public void setFood(String food) {
-		this.food = food;
-	}
-	public String getHotel() {
-		return hotel;
-	}
-	public void setHotel(String hotel) {
-		this.hotel = hotel;
-	}
+	
 	public int getId() {
 		return id;
 	}
@@ -70,17 +43,17 @@ public class TourByDay  implements Serializable{
 	public void setTourPostID(int tourPostID) {
 		this.tourPostID = tourPostID;
 	}
-	public int getDay() {
-		return day;
+	public int getReportedBy() {
+		return reportedBy;
 	}
-	public void setDay(int day) {
-		this.day = day;
+	public void setReportedBy(int reportedBy) {
+		this.reportedBy = reportedBy;
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
-		description = description;
+		this.description = description;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -100,4 +73,7 @@ public class TourByDay  implements Serializable{
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+	
+	
+	
 }

@@ -64,5 +64,15 @@ public class PlaceDAOImpl implements ICommonDAO<Place>, IPlaceDAO<Place>{
 		return count > 0 ? true : false;
 		
 	}
+
+//	@Override
+//	public Place getPlaceByPostTitle(String name) {
+//		String hql = "FROM Place AS p WHERE p.name = ? and p.deleted = ?";
+//		List<Place> listP = entityManager.createQuery(hql).setParameter(1, name).setParameter(2, 0).getResultList();
+//		if(listP.isEmpty()) {
+//			return null;
+//		}
+//		return (Place)listP.get(0);
+//	}
 	
 }
