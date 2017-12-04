@@ -43,6 +43,38 @@ public class TourPost implements Serializable {
 	private String createTime;
 	@Column(name = "Updated_Time")
 	private String updateTime;
+	@Column(name = "Reference_Link ")
+	private String referenceLink;
+	public String getReferenceLink() {
+		return referenceLink;
+	}
+	public void setReferenceLink(String referenceLink) {
+		this.referenceLink = referenceLink;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
+	}
+	@Column(name = "Type")
+	private int type;
+	@Column(name = "Start_Time")
+	private String startTime;
+	@Column(name = "Category")
+	private int category;
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public String getUpdateTime() {
 		return updateTime;
 	}
