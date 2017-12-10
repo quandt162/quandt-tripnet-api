@@ -27,8 +27,8 @@ public class LikeDAOImpl implements ICommonDAO<Like>, ILikeDAO<Like>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Like> getAll() {
-		String hql = "FROM Like AS l WHERE l.deleted = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
+		String hql = "FROM Like AS l";
+		return entityManager.createQuery(hql).getResultList();
 	}
 
 	@Override

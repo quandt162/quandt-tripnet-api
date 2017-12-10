@@ -30,7 +30,14 @@ public class ReportTourPost {
 	private String createTime;
 	@Column(name = "Updated_Time")
 	private String updateTime;
-	
+	@Column(name = "Reason_Report")
+	private String reasonReport;
+	public String getReasonReport() {
+		return reasonReport;
+	}
+	public void setReasonReport(String reasonReport) {
+		this.reasonReport = reasonReport;
+	}
 	public int getId() {
 		return id;
 	}

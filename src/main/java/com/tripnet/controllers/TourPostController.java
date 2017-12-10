@@ -35,18 +35,39 @@ public class TourPostController {
 		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
 	}
 	
-	@GetMapping("post/title/{title}")
-	public ResponseEntity<TourPost> getAllTourPostByTitle(@PathVariable("title") String title) {
-		TourPost TourPost = tourPostService.getAllTourPostByTitle(title);
-		return new ResponseEntity<TourPost>(TourPost, HttpStatus.OK);
-	}
-	
+
 	@GetMapping("post/get-all")
-	public ResponseEntity<List<TourPost>> getAllTourPosts() {
+	public ResponseEntity<List<TourPost>> getTourPostByDuration() {
 		List<TourPost> list = commonService.getAll();
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
 	
+	//get post by title
+	@GetMapping("post/title/{title}")
+	public ResponseEntity<List<TourPost>> getTourPostByTitle(@PathVariable("title") String title) {
+		List<TourPost> list = tourPostService.getAllTourPostByTitle(title);
+		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
+	}
+	//get post by name
+	@GetMapping("post/name/{name}")
+	public ResponseEntity<List<TourPost>> getTourPostByName(@PathVariable("name") String name) {
+		List<TourPost> list = tourPostService.getAllTourPostByAccountName(name);
+		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
+	}
+	
+	//get post by duration
+	@GetMapping("post/duration/{duration}")
+	public ResponseEntity<List<TourPost>> getTourPostByDuration(@PathVariable("duration") int duration) {
+		List<TourPost> list = tourPostService.getAllTourPostByDuration(duration);
+		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
+	}
+	
+	//get post by duration
+	@GetMapping("post/place/{place}")
+	public ResponseEntity<List<TourPost>> getTourPostByDuration(@PathVariable("place") String place) {
+		List<TourPost> list = tourPostService.getAllTourPostByPlace(place);
+		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
+	}
 	
 	@PostMapping("post")
 	public ResponseEntity<Integer> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {

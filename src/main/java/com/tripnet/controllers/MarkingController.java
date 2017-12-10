@@ -28,23 +28,28 @@ public class MarkingController {
 	@Autowired
 	private ICommonService<Marking> commonService;
 	@Autowired
-	private IMarkingService<Marking> Markingservice;
+	private IMarkingService<Marking> MarkingService;
 	
-	@GetMapping("{accountId}/marking/{mId}")
-	public ResponseEntity<Marking> getMarkingById(@PathVariable("accountId") Integer accountId,@PathVariable("mId") Integer mId) {
-		Marking Marking = Markingservice.getOneById(accountId, mId);
+	@GetMapping("{marking/{mid}")
+	public ResponseEntity<Marking> getMarkingById(@PathVariable("mid") Integer mid) {
+		Marking Marking = commonService.getOneById(mid);
 		return new ResponseEntity<Marking>(Marking, HttpStatus.OK);
 	}
 	
-	@GetMapping("{accountID}/Marking/get-all")
-	public ResponseEntity<List<Marking>> getAllMarking(@PathVariable("accountID") Integer accountID) {
-		List<Marking> list = Markingservice.getAllMarking(accountID);
+	@GetMapping("marking/get-all/{accountID}")
+	public ResponseEntity<List<Marking>> getAllMarkings(@PathVariable("accountID") Integer accountID) {
+		List<Marking> list = MarkingService.getAllMarkingByAccountID(accountID);
 		return new ResponseEntity<List<Marking>>(list, HttpStatus.OK);
 	}
 	
+	@GetMapping("marking/get-all-by-tourpost/{tourPostID}")
+	public ResponseEntity<List<Marking>> getAllMarkingsByTourPostID(@PathVariable("tourPostID") Integer tourPostID) {
+		List<Marking> list = MarkingService.getAllMarkingByTourPostID(tourPostID);
+		return new ResponseEntity<List<Marking>>(list, HttpStatus.OK);
+	}
 	
-	@PostMapping("{accountID}/Marking")
-	public ResponseEntity<Void> addMarking(@RequestBody Marking Marking, UriComponentsBuilder builder,@PathVariable("postid") Integer postid) {
+	@PostMapping("marking")
+	public ResponseEntity<Void> addMarking(@RequestBody Marking Marking, UriComponentsBuilder builder) {
         boolean flagMarking = commonService.add(Marking);
         if (flagMarking == false) {
         	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -55,10 +60,14 @@ public class MarkingController {
 	}
 	
 
-	@PutMapping("{accountID}/Marking")
-	public ResponseEntity<Marking> updateMarking(@RequestBody Marking Marking,@PathVariable("postid") Integer postid) {
+	@PutMapping("marking")
+	public ResponseEntity<Marking> updateMarking(@RequestBody Marking Marking) {
 		commonService.update(Marking);
 		return new ResponseEntity<Marking>(Marking, HttpStatus.OK);
+	}
+	
+	public MarkingController() {
+		// TODO Auto-generated constructor stub
 	}
 	
 }

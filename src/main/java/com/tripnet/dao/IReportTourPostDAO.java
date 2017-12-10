@@ -6,7 +6,9 @@ import com.tripnet.enties.ReportTourPost;
 
 public interface IReportTourPostDAO<ReportTourPost> {
 	
-	public ReportTourPost getReportTourPost();
+	List<ReportTourPost> getAllReportByAccountID(int reportedBy);
 	
-	public void add(List<ReportTourPost> list);
+	List<ReportTourPost> getAllReportOfPost(int postID);
+	
+	int getNumberReportOfPost(int postID);
 }

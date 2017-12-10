@@ -24,8 +24,16 @@ public class Like implements Serializable {
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
+	@Column(name = "Updated_Time")
+	private String updatedTime;
 	public int getId() {
 		return Id;
+	}
+	public String getUpdatedTime() {
+		return updatedTime;
+	}
+	public void setUpdatedTime(String updatedTime) {
+		this.updatedTime = updatedTime;
 	}
 	public void setId(int id) {
 		Id = id;

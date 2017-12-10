@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tripnet.dao.ICommonDAO;
-import com.tripnet.dao.IMarking;
+import com.tripnet.dao.IMarkingDAO;
 import com.tripnet.enties.Marking;
 import com.tripnet.services.ICommonService;
 import com.tripnet.services.IMarkingService;
@@ -19,48 +19,36 @@ public class MarkingServiceImpl implements ICommonService<Marking>, IMarkingServ
 	@Autowired 
 	private ICommonDAO<Marking> commonDAO;
 	@Autowired 
-	private IMarkingService<Marking> iMarking;
-	
+	private IMarkingDAO<Marking> markingDAO;
+	@Override
+	public List<Marking> getAllMarkingByAccountID(int accountID) {
+		return markingDAO.getAllMarkingByAccount(accountID);
+	}
+	@Override
+	public List<Marking> getAllMarkingByTourPostID(int tourPostID) {
+		return markingDAO.getAllMarkingByTourPostID(tourPostID);
+	}
 	@Override
 	public Marking getOneById(int objectId) {
 		return commonDAO.getOneById(objectId);
 	}
-
 	@Override
 	public List<Marking> getAll() {
 		return commonDAO.getAll();
 	}
-
 	@Override
 	public boolean add(Marking object) {
-		if(object != null) {
-			commonDAO.add(object);
-			return true;
-		}
-		return false;
+		commonDAO.add(object);
+		return true;
 	}
-
 	@Override
 	public void update(Marking object) {
-		if(object != null) {
-			commonDAO.update(object);
-		}
+		if(object!= null) commonDAO.update(object);
 	}
-
 	@Override
 	public void delete(int objectId) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Marking getOneById(int accountId, int mId) {
-		return iMarking.getOneById(accountId, mId);
-	}
-
-	@Override
-	public List<Marking> getAllMarking(int accountId) {
-		return iMarking.getAllMarking(accountId);
 	}
 
 }

@@ -18,12 +18,14 @@ public class Marking {
 	private int Id;
 	@Column(name = "Tour_Post_ID")
 	private int tourPostID;
-	@Column(name = "Account_ID")
-	private int accountID;
+	@Column(name = "Marking_By_ID")
+	private int markingByID;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
+	@Column(name = "Update_Time")
+	private String updateTime;
 	public int getId() {
 		return Id;
 	}
@@ -36,11 +38,11 @@ public class Marking {
 	public void setTourPostID(int tourPostID) {
 		this.tourPostID = tourPostID;
 	}
-	public int getAccountID() {
-		return accountID;
+	public int getMarkingByID() {
+		return markingByID;
 	}
-	public void setAccountID(int accountID) {
-		this.accountID = accountID;
+	public void setMarkingByID(int markingByID) {
+		this.markingByID = markingByID;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -53,5 +55,11 @@ public class Marking {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 }

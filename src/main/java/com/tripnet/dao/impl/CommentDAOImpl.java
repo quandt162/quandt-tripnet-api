@@ -57,4 +57,10 @@ public class CommentDAOImpl implements ICommonDAO<Comment>, ICommentDAO<Comment>
 		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, tourPostID).getResultList();
 	}
 
+	@Override
+	public int getNumberCommentOfPost(int postID) {
+		String hql = "FROM Comment as c WHERE c.deleted = ? AND c.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, postID).getResultList().size();
+	}
+
 }

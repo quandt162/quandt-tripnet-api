@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tripnet.dao.ICommonDAO;
-import com.tripnet.dao.IMarking;
+import com.tripnet.dao.IMarkingDAO;
 import com.tripnet.dao.ITourPostDAO;
 import com.tripnet.enties.Like;
 import com.tripnet.enties.Marking;
@@ -19,7 +19,7 @@ import com.tripnet.enties.TourPost;
  */
 @Transactional
 @Repository
-public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarking<Marking> {
+public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarkingDAO<Marking> {
 	@PersistenceContext	
 	private EntityManager entityManager;
 	
@@ -31,25 +31,21 @@ public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarking<Marking> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Marking> getAll() {
-		String hql = "FROM Marking AS mk WHERE mk.deleted = ?";
+		String hql = "FROM Marking AS m WHERE m.deleted = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
 	}
 
 	@Override
 	public void add(Marking object) {
-		if(null != object) {
-			entityManager.persist(object);
-		}
+		entityManager.persist(object);
 	}
 
 	@Override
 	public void update(Marking object) {
-		if(null != object) {
-			Marking mk = getOneById(object.getTourPostID(), object.getAccountID());
-			mk.setCreateTime(object.getCreateTime());
-			mk.setDeleted(object.getDeleted());
-			entityManager.flush();
-		}
+		Marking m = getOneById(object.getId());
+		m.setDeleted(object.getDeleted());
+		m.setUpdateTime(object.getUpdateTime());
+		entityManager.flush();
 	}
 
 	@Override
@@ -57,22 +53,17 @@ public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarking<Marking> {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public Marking getOneById(int accountId, int mId) {
-		String hql = "FROM Marking AS l WHERE l.deleted = ? AND l.tourPostID = ? AND  l.accountID = ?";
-		List<Marking> result = entityManager.createQuery(hql).setParameter(1,0 ).setParameter(2,accountId ).setParameter(3,mId ).getResultList();
-		if(result.isEmpty()) {
-			return null;
-		}
-		return (Marking)result.get(0);
-	}
-
-	@Override
-	public List<Marking> getAllMarking(int accountId) {
-		String hql = "FROM Marking AS l WHERE l.deleted = ? AND l.tourPostID = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,accountId ).getResultList();
+	public List<Marking> getAllMarkingByAccount(int accountID) {
+		String hql = "FROM Marking AS m WHERE m.markingByID = ?";
+		return entityManager.createQuery(hql).setParameter(1, accountID).getResultList();
 	}
 	
+	@Override
+	public List<Marking> getAllMarkingByTourPostID(int tourPostID) {
+		String hql = "FROM Marking AS m WHERE m.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, tourPostID).getResultList();
+	}
 	
 }

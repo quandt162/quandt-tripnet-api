@@ -35,8 +35,23 @@ public class ReportTourPostDAOImpl implements ICommonDAO<ReportTourPost>, IRepor
 	}
 
 	@Override
+	public void add(ReportTourPost object) {
+		if(null != object) {
+			entityManager.persist(object);
+		}
+	}
+	
+	@Override
 	public void update(ReportTourPost object) {
-		// TODO Auto-generated method stub
+		if(null != object) {
+			ReportTourPost r = getOneById(object.getId());
+			r.setDeleted(object.getDeleted());
+			r.setDescription(object.getDescription());
+			r.setReasonReport(object.getReasonReport());
+			r.setUpdateTime(object.getUpdateTime());
+			
+			entityManager.flush();
+		}
 		
 	}
 
@@ -46,26 +61,23 @@ public class ReportTourPostDAOImpl implements ICommonDAO<ReportTourPost>, IRepor
 		
 	}
 
+
 	@Override
-	public void add(ReportTourPost object) {
-		// TODO Auto-generated method stub
-		
+	public List<ReportTourPost> getAllReportByAccountID(int reportedBy) {
+		String hql = "FROM ReportTourPost as rp WHERE rp.deleted = ? AND rp.reportedBy = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, reportedBy).getResultList();
 	}
 
 	@Override
-	public ReportTourPost getReportTourPost() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReportTourPost> getAllReportOfPost(int postID) {
+		String hql = "FROM ReportTourPost as rp WHERE rp.deleted = ? AND rp.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, postID).getResultList();
 	}
-	
+
 	@Override
-	public void add(List<ReportTourPost> list) {
-		if(null != list) {
-			for (ReportTourPost reportTourPost : list) {
-				entityManager.persist(reportTourPost);
-			}
-			
-		}
+	public int getNumberReportOfPost(int postID) {
+		String hql = "FROM ReportTourPost as rp WHERE rp.deleted = ? AND rp.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, postID).getResultList().size();
 	}
 	
 }

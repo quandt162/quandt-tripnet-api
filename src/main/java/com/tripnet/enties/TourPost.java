@@ -36,7 +36,7 @@ public class TourPost implements Serializable {
 	@Column(name = "Tour_Article_Title")
 	private String tourArticleTitle;
 	@Column(name = "Post_View_Number")
-	private String postViewNumber;
+	private int postViewNumber;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
@@ -147,10 +147,10 @@ public class TourPost implements Serializable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getPostViewNumber() {
+	public int getPostViewNumber() {
 		return postViewNumber;
 	}
-	public void setPostViewNumber(String postViewNumber) {
+	public void setPostViewNumber(int postViewNumber) {
 		this.postViewNumber = postViewNumber;
 	}
 }

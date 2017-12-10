@@ -57,6 +57,9 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 			tp.setNote(object.getNote());
 			tp.setPrepare(object.getPrepare());
 			tp.setType(object.getType());
+			tp.setReferenceLink(object.getReferenceLink());
+			tp.setStartTime(object.getStartTime());
+			tp.setCategory(object.getCategory());
 			entityManager.flush();	
 		}
 	}
@@ -75,9 +78,14 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 	}
 
 	@Override
-	public List<TourPost> getAllTourPostByAccountId(int accountID) {
+	public TourPost getTourPostByAccountId(int accountID) {
 		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.accountID = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, accountID).getResultList();
+		@SuppressWarnings("rawtypes")
+		List list = entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, accountID).getResultList();
+		if(list.isEmpty()) {
+			return null;
+		}
+		return (TourPost)list.get(0);
 	}
 
 
@@ -87,27 +95,25 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TourPost> getAllTourPostByDuration(int duration) {
 		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.duration = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, duration).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<TourPost> getAllTourPostByPlace(String place1, String place2) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.place1 = ? OR  tp.place2 = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, place1).setParameter(3, place2).getResultList();
+	public List<TourPost> getAllTourPostByPlace(String place) {
+		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.place1 = ? ";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,place).getResultList();
 	}
 
 	@Override
-	public TourPost getAllTourPostByTitle(String title) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.tourArticleTitle =?";
-		List<TourPost> list = entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, title).getResultList();
-		
-		if(list.isEmpty()) {
-			return null;
-		}
-		return (TourPost)list.get(0);
-				
+	public List<TourPost> getAllTourPostByTitle(String title) {
+		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.tourArticleTitle like ?";
+		@SuppressWarnings("unchecked")
+		List<TourPost> list = entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,"%" + title +"%").getResultList();
+		return list;
 	}
 }

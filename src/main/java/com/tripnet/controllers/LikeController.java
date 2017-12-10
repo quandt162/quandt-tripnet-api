@@ -36,6 +36,12 @@ public class LikeController {
 		return new ResponseEntity<Like>(Like, HttpStatus.OK);
 	}
 	
+	@GetMapping("/like/get-all")
+	public ResponseEntity<List<Like>> getAll() {
+		List<Like> list = likeService.getAll();
+		return new ResponseEntity<List<Like>>(list, HttpStatus.OK);
+	}
+	
 	@GetMapping("{postid}/like/get-all")
 	public ResponseEntity<List<Like>> getAllLikes(@PathVariable("postid") Integer postid) {
 		List<Like> list = likeService.getAllLikeByTourPostID(postid);
