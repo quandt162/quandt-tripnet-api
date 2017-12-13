@@ -1,25 +1,18 @@
 package com.tripnet.dao.impl;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.IMarkingDAO;
-import com.tripnet.dao.ITourPostDAO;
-import com.tripnet.enties.Like;
 import com.tripnet.enties.Marking;
-import com.tripnet.enties.TourPost;
-/*
- * *Author: QuanDT
- */
+
 @Transactional
 @Repository
 public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarkingDAO<Marking> {
+
 	@PersistenceContext	
 	private EntityManager entityManager;
 	
@@ -56,14 +49,8 @@ public class MarkingDAOImpl implements ICommonDAO<Marking>, IMarkingDAO<Marking>
 	
 	@Override
 	public List<Marking> getAllMarkingByAccount(int accountID) {
-		String hql = "FROM Marking AS m WHERE m.markingByID = ?";
-		return entityManager.createQuery(hql).setParameter(1, accountID).getResultList();
+		String hql = "FROM Marking AS m WHERE m.deleted = ? AND m.makingByID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, accountID).getResultList();
 	}
-	
-	@Override
-	public List<Marking> getAllMarkingByTourPostID(int tourPostID) {
-		String hql = "FROM Marking AS m WHERE m.tourPostID = ?";
-		return entityManager.createQuery(hql).setParameter(1, tourPostID).getResultList();
-	}
-	
+
 }

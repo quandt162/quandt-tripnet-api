@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import com.tripnet.enties.Marking;
 import com.tripnet.services.ICommonService;
 import com.tripnet.services.IMarkingService;
+
 /*
- *Author: QuanDT 
- *29/11/2017
+ * *Author: QuanDT
  */
 @Controller
 @RequestMapping("user/account")
@@ -30,6 +29,7 @@ public class MarkingController {
 	@Autowired
 	private IMarkingService<Marking> MarkingService;
 	
+
 	@GetMapping("{marking/{mid}")
 	public ResponseEntity<Marking> getMarkingById(@PathVariable("mid") Integer mid) {
 		Marking Marking = commonService.getOneById(mid);
@@ -42,11 +42,6 @@ public class MarkingController {
 		return new ResponseEntity<List<Marking>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("marking/get-all-by-tourpost/{tourPostID}")
-	public ResponseEntity<List<Marking>> getAllMarkingsByTourPostID(@PathVariable("tourPostID") Integer tourPostID) {
-		List<Marking> list = MarkingService.getAllMarkingByTourPostID(tourPostID);
-		return new ResponseEntity<List<Marking>>(list, HttpStatus.OK);
-	}
 	
 	@PostMapping("marking")
 	public ResponseEntity<Void> addMarking(@RequestBody Marking Marking, UriComponentsBuilder builder) {
@@ -69,5 +64,4 @@ public class MarkingController {
 	public MarkingController() {
 		// TODO Auto-generated constructor stub
 	}
-	
 }

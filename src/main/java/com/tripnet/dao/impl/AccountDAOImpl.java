@@ -21,6 +21,12 @@ public class AccountDAOImpl implements ICommonDAO<Account>, IAccountDAO<Account>
 		return entityManager.find(Account.class, accountId);
 	}
 	
+	// trong code java co can dinh nghia forgie key k anh, ko can
+	// a dang thay phan config sssionFactory cua em hoi la.
+	// em k biet a, em chi lam tiep thoi, du an co san
+	// neu ma ko dung @ManyToOne thi van chay bthg ah????
+	// chay binh thuong vi no k can khoa ngoai
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Account> getAll() {

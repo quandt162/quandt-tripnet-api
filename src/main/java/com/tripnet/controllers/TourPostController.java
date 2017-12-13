@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tripnet.enties.TourPost;
@@ -37,18 +38,18 @@ public class TourPostController {
 	
 
 	@GetMapping("post/get-all")
-	public ResponseEntity<List<TourPost>> getAll() {
-		List<TourPost> list = tourPostService.getAll();
+	public ResponseEntity<List<TourPost>> getTourPostByDuration() {
+		List<TourPost> list = commonService.getAll();
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
 	
-	//get post by title
+	//get post by post title
 	@GetMapping("post/title/{title}")
 	public ResponseEntity<List<TourPost>> getTourPostByTitle(@PathVariable("title") String title) {
 		List<TourPost> list = tourPostService.getAllTourPostByTitle(title);
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
-	//get post by name
+	//get post by Account Name
 	@GetMapping("post/name/{name}")
 	public ResponseEntity<List<TourPost>> getTourPostByName(@PathVariable("name") String name) {
 		List<TourPost> list = tourPostService.getAllTourPostByAccountName(name);
@@ -62,12 +63,21 @@ public class TourPostController {
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
 	
-	//get post by duration
-	@GetMapping("post/place/{place}")
-	public ResponseEntity<List<TourPost>> getTourPostByDuration(@PathVariable("place") String place) {
-		List<TourPost> list = tourPostService.getAllTourPostByPlace(place);
+	//get post by Pace
+	@GetMapping("post/place/")
+	public ResponseEntity<List<TourPost>> getTourPostByDuration(@RequestParam(name="place1",required = false) String place1, 
+																@RequestParam(name="place2",required = false) String place2) {
+		List<TourPost> list = tourPostService.getAllTourPostByPlace(place1,place2);
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
+	
+	//get post by Category name
+	@GetMapping("post/category/{name}")
+	public ResponseEntity<List<TourPost>> getTourPostByCategory(@PathVariable("name") String name) {
+		List<TourPost> list = tourPostService.getAllTourPostByCategory(name);
+		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
+	}
+
 	
 	@PostMapping("post")
 	public ResponseEntity<Integer> addTourPost(@RequestBody TourPost TourPost, UriComponentsBuilder builder) {
@@ -80,6 +90,7 @@ public class TourPostController {
         return new ResponseEntity<Integer>(TourPost.getId(), HttpStatus.CREATED);
 	}
 	
+	//anh vao chua a, lam sao de noi chuyen voi a nhi
 
 	@PutMapping("post")
 	public ResponseEntity<TourPost> updateTourPost(@RequestBody TourPost TourPost) {

@@ -1,18 +1,13 @@
 package com.tripnet.dao.impl;
 
-import java.util.Iterator;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.IReportTourPostDAO;
 import com.tripnet.enties.ReportTourPost;
-import com.tripnet.enties.TourByDay;
 
 /*
  * *Author: QuanDT

@@ -27,8 +27,8 @@ public class LikeDAOImpl implements ICommonDAO<Like>, ILikeDAO<Like>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Like> getAll() {
-		String hql = "FROM Like AS l";
-		return entityManager.createQuery(hql).getResultList();
+		String hql = "FROM Like AS l WHERE l.deleted = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public class LikeDAOImpl implements ICommonDAO<Like>, ILikeDAO<Like>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Like> getAllLikeByTourPostID(int tourPostID) {
-		String hql = "FROM Like AS l WHERE l.tourPostID = ?";
-		return entityManager.createQuery(hql).setParameter(1, tourPostID).getResultList();
+		String hql = "FROM Like AS l WHERE l.deleted = ? AND l.tourPostID = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,tourPostID ).getResultList();
 	}
 
 	@Override

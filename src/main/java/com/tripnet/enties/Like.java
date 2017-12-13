@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * Author QuanDT
+ * 
+ * */
+
 @Entity
 @Table(name = "likes")
 public class Like implements Serializable {
@@ -24,16 +29,8 @@ public class Like implements Serializable {
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
-	@Column(name = "Updated_Time")
-	private String updatedTime;
 	public int getId() {
 		return Id;
-	}
-	public String getUpdatedTime() {
-		return updatedTime;
-	}
-	public void setUpdatedTime(String updatedTime) {
-		this.updatedTime = updatedTime;
 	}
 	public void setId(int id) {
 		Id = id;

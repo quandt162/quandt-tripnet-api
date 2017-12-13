@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.IMarkingDAO;
 import com.tripnet.enties.Marking;
@@ -23,10 +22,6 @@ public class MarkingServiceImpl implements ICommonService<Marking>, IMarkingServ
 	@Override
 	public List<Marking> getAllMarkingByAccountID(int accountID) {
 		return markingDAO.getAllMarkingByAccount(accountID);
-	}
-	@Override
-	public List<Marking> getAllMarkingByTourPostID(int tourPostID) {
-		return markingDAO.getAllMarkingByTourPostID(tourPostID);
 	}
 	@Override
 	public Marking getOneById(int objectId) {
@@ -50,5 +45,4 @@ public class MarkingServiceImpl implements ICommonService<Marking>, IMarkingServ
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -25,29 +25,27 @@ public class TourByDay  implements Serializable{
 	@Column(name = "Day")
 	private int day;
 	@Column(name = "Place_ID")
-	private String placeID;
-	@Column(name = "Place_Detail")
-	private String placeDetail;
+	private int placeID;
 	@Column(name = "Description")
 	private String description;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
+	@Column(name = "Note")
+	private String note;
 	@Column(name = "Food")
 	private String food;
 	@Column(name = "Hotel")
 	private String hotel;
-	@Column(name = "Vehicle")
-	private String vehicle;
-	public String getVehicle() {
-		return vehicle;
-	}
-	public void setVehicle(String vehicle) {
-		this.vehicle = vehicle;
-	}
 	@Column(name = "Updated_Time")
 	private String updateTime;
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
 	public String getFood() {
 		return food;
 	}
@@ -82,7 +80,7 @@ public class TourByDay  implements Serializable{
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		description = description;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -101,17 +99,5 @@ public class TourByDay  implements Serializable{
 	}
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
-	}
-	public String getPlaceID() {
-		return placeID;
-	}
-	public void setPlaceID(String placeID) {
-		this.placeID = placeID;
-	}
-	public String getPlaceDetail() {
-		return placeDetail;
-	}
-	public void setPlaceDetail(String placeDetail) {
-		this.placeDetail = placeDetail;
 	}
 }

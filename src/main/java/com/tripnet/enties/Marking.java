@@ -1,6 +1,5 @@
 package com.tripnet.enties;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * Author QuanDT
+ * 
+ * */
+
 @Entity
-@Table(name = "marking")
+@Table(name = "Marking")
 public class Marking {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -19,7 +23,7 @@ public class Marking {
 	@Column(name = "Tour_Post_ID")
 	private int tourPostID;
 	@Column(name = "Marking_By_ID")
-	private int markingByID;
+	private int makingByID;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
@@ -39,10 +43,10 @@ public class Marking {
 		this.tourPostID = tourPostID;
 	}
 	public int getMarkingByID() {
-		return markingByID;
+		return makingByID;
 	}
-	public void setMarkingByID(int markingByID) {
-		this.markingByID = markingByID;
+	public void setMarkingByID(int makingByID) {
+		this.makingByID = makingByID;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -62,4 +66,5 @@ public class Marking {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+	
 }

@@ -11,4 +11,5 @@ public interface IReportTourPostDAO<ReportTourPost> {
 	List<ReportTourPost> getAllReportOfPost(int postID);
 	
 	int getNumberReportOfPost(int postID);
+	
 }
