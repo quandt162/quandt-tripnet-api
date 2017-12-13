@@ -21,4 +21,6 @@ public interface ITourPostService<T	> {
 	 public List<T> getAllTourPostByPlace(String place1);
 	 
 	 public List<T> getAllTourPostByTitle(String title);
+	 
+	 public List<T> getAll();
 }

@@ -60,7 +60,7 @@ public class JoinGroupDAOImpl implements ICommonDAO<JoinGroup>, IJoinGroupDAO<Jo
 
 	@Override
 	public JoinGroup getJoinGroup(int tourID, int accountID) {
-		String hql = "FROM JoinGroup AS l WHERE l.tourPostID = ? AND  l.JoinGroupByID = ?";
+		String hql = "FROM JoinGroup AS l WHERE l.tourPostID = ? AND  l.joinGroupByID = ?";
 		List<JoinGroup> result = entityManager.createQuery(hql).setParameter(1,tourID ).setParameter(2,accountID ).getResultList();
 		if(result.isEmpty()) {
 			return null;

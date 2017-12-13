@@ -37,8 +37,8 @@ public class TourPostController {
 	
 
 	@GetMapping("post/get-all")
-	public ResponseEntity<List<TourPost>> getTourPostByDuration() {
-		List<TourPost> list = commonService.getAll();
+	public ResponseEntity<List<TourPost>> getAll() {
+		List<TourPost> list = tourPostService.getAll();
 		return new ResponseEntity<List<TourPost>>(list, HttpStatus.OK);
 	}
 	

@@ -48,6 +48,11 @@ public class JoinGroupController {
 		return new ResponseEntity<List<JoinGroup>>(list, HttpStatus.OK);
 	}
 	
+	@GetMapping("/joingroup/get-number-by-tourpost/{postid}")
+	public ResponseEntity<Integer> getNumberJoinGroups(@PathVariable("postid") Integer postid) {
+		int number = JoinGroupService.getAllJoinGroupByTourPostID(postid).size();
+		return new ResponseEntity<Integer>(number, HttpStatus.CREATED);
+	}
 	
 	@PostMapping("/joingroup")
 	public ResponseEntity<Void> addJoinGroup(@RequestBody JoinGroup JoinGroup, UriComponentsBuilder builder) {

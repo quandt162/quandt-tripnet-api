@@ -28,8 +28,8 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TourPost> getAll() {
-		String hql = "FROM TourPost AS tp WHERE tp.deleted = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
+		String hql = "FROM TourPost AS tp ";
+		return entityManager.createQuery(hql).getResultList();
 	}
 
 	@Override

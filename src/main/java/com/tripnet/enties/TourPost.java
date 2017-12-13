@@ -45,6 +45,13 @@ public class TourPost implements Serializable {
 	private String updateTime;
 	@Column(name = "Reference_Link ")
 	private String referenceLink;
+	@Column(name = "Type")
+	private int type;
+	@Column(name = "Start_Time")
+	private String startTime;
+	@Column(name = "Category")
+	private int category;
+	
 	public String getReferenceLink() {
 		return referenceLink;
 	}
@@ -63,12 +70,6 @@ public class TourPost implements Serializable {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	@Column(name = "Type")
-	private int type;
-	@Column(name = "Start_Time")
-	private String startTime;
-	@Column(name = "Category")
-	private int category;
 	public int getType() {
 		return type;
 	}
