@@ -43,14 +43,14 @@ public class TourByDayController {
 	
 	
 	@PostMapping("{id}/day")
-	public ResponseEntity<Void> addTourByDay(@RequestBody TourByDay TourByDay, UriComponentsBuilder builder,@PathVariable("id") Integer id) {
+	public ResponseEntity<Integer> addTourByDay(@RequestBody TourByDay TourByDay, UriComponentsBuilder builder,@PathVariable("id") Integer id) {
         boolean flag = commonService.add(TourByDay);
         if (flag == false) {
-        	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        	return new ResponseEntity<Integer>(HttpStatus.CONFLICT);
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/article/{id}").buildAndExpand(TourByDay.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/article/{id}").buildAndExpand(TourByDay.getId()).toUri());
+        return new ResponseEntity<Integer>(TourByDay.getId(), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("{id}/day")

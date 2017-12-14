@@ -91,8 +91,12 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 
 	@Override
 	public List<TourPost> getAllTourPostByAccountName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "select tp from TourPost tp join  tp.account ta where  ta.name like :userName";
+		List list = entityManager.createQuery(hql).setParameter("userName", "%" + userName + "%").getResultList();
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 
 	@SuppressWarnings("unchecked")
