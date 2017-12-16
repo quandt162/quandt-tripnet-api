@@ -76,5 +76,13 @@ public class Place implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Place(int id) {
+		super();
+		Id = id;
+	}
+	
+	public Place() {
+		// TODO Auto-generated constructor stub
+	}
 	
 }

@@ -41,12 +41,6 @@ public class CommentController {
 		return new ResponseEntity<List<Comment>>(list, HttpStatus.OK);
 	}
 	
-	//get number report of a post
-	@GetMapping("get-number-comment-of-post/{postID}")
-	public ResponseEntity<Integer> getNumberCommentOfPost(@PathVariable("postID") Integer postID) {
-		int numberReport = commentService.getNumberCommentOfPost(postID);
-        return new ResponseEntity<Integer>(numberReport, HttpStatus.CREATED);
-	}
 	
 	@PostMapping("{postid}/comment")
 	public ResponseEntity<Void> addComment(@RequestBody Comment Comment, UriComponentsBuilder builder,@PathVariable("postid") Integer postid) {

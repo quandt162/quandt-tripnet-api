@@ -58,8 +58,8 @@ public class ReportTourPostController {
         return new ResponseEntity<Integer>(numberReport, HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/report-tour")
-	public ResponseEntity<Void> addReportTourPost(@RequestBody ReportTourPost ReportTourPost, UriComponentsBuilder builder) {
+	@PostMapping("/{postid}/report-tour")
+	public ResponseEntity<Void> addReportTourPost(@RequestBody ReportTourPost ReportTourPost, UriComponentsBuilder builder,@PathVariable("postid") Integer postid) {
         boolean flagReportTourPost = common.add(ReportTourPost);
         if (flagReportTourPost == false) {
         	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -70,8 +70,8 @@ public class ReportTourPostController {
 	}
 	
 
-	@PutMapping("/report-tour")
-	public ResponseEntity<ReportTourPost> updateReportTourPost(@RequestBody ReportTourPost ReportTourPost) {
+	@PutMapping("/{postid}/report-tour")
+	public ResponseEntity<ReportTourPost> updateReportTourPost(@RequestBody ReportTourPost ReportTourPost,@PathVariable("postid") Integer postid) {
 		common.update(ReportTourPost);
 		return new ResponseEntity<ReportTourPost>(ReportTourPost, HttpStatus.OK);
 	}

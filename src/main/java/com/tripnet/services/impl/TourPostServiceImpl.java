@@ -75,8 +75,13 @@ public class TourPostServiceImpl implements ICommonService<TourPost>,ITourPostSe
 	}
 
 	@Override
-	public List<TourPost> getAllTourPostByPlace(String place) {
-		return tourPostDAO.getAllTourPostByPlace(place);
+	public List<TourPost> getAllTourPostByPlace(String place1, String place2) {
+		return tourPostDAO.getAllTourPostByPlace(place1,place2);
+	}
+
+	@Override
+	public List<TourPost> getAllTourPostByCategory(String name) {
+		return tourPostDAO.getAllTourPostByCategory(name);
 	}
 
 }

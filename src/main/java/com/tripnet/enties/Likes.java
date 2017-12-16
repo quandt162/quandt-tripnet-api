@@ -1,5 +1,6 @@
 package com.tripnet.enties;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,14 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/*
- * Author QuanDT
- * 
- * */
-
 @Entity
-@Table(name = "Marking")
-public class Marking {
+@Table(name = "likes")
+public class Likes implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,14 +18,12 @@ public class Marking {
 	private int Id;
 	@Column(name = "Tour_Post_ID")
 	private int tourPostID;
-	@Column(name = "Marking_By_ID")
-	private int makingByID;
+	@Column(name = "Like_By_ID")
+	private int likeByID;
 	@Column(name = "Deleted")
 	private int deleted;
 	@Column(name = "Created_Time")
 	private String createTime;
-	@Column(name = "Update_Time")
-	private String updateTime;
 	public int getId() {
 		return Id;
 	}
@@ -42,11 +36,11 @@ public class Marking {
 	public void setTourPostID(int tourPostID) {
 		this.tourPostID = tourPostID;
 	}
-	public int getMarkingByID() {
-		return makingByID;
+	public int getLikeByID() {
+		return likeByID;
 	}
-	public void setMarkingByID(int makingByID) {
-		this.makingByID = makingByID;
+	public void setLikeByID(int likeByID) {
+		this.likeByID = likeByID;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -59,12 +53,6 @@ public class Marking {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-	public String getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
 	}
 	
 }

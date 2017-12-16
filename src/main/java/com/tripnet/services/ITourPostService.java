@@ -6,21 +6,17 @@ import com.tripnet.enties.TourPost;
 /*
  * *Author: QuanDT
  */
-public interface ITourPostService<T	> {
-	 public T getOneById(int objectId);
-//	List<T> getAll();	
-//    boolean add(T object);
-//    void update(T object);
-//    void delete(int objectId);
+public interface ITourPostService<TourPost> {
+
 	 public TourPost getTourPostByAccountId(int accountID);
 	 
-	 public List<T> getAllTourPostByAccountName(String userName);
+	 public List<TourPost> getAllTourPostByAccountName(String userName);
 	 
-	 public List<T> getAllTourPostByDuration(int duration);
+	 public List<TourPost> getAllTourPostByDuration(int duration);
 	 
-	 public List<T> getAllTourPostByPlace(String place1);
+	 public List<TourPost> getAllTourPostByPlace(String place1, String place2);
 	 
-	 public List<T> getAllTourPostByTitle(String title);
+	 public List<TourPost> getAllTourPostByTitle(String title);
 	 
-	 public List<T> getAll();
+	 public List<TourPost> getAllTourPostByCategory(String name);
 }

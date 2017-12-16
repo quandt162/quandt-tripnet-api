@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.dao.ITourPostDAO;
+import com.tripnet.enties.Place;
 import com.tripnet.enties.TourPost;
 /*
  * *Author: QuanDT
@@ -28,8 +29,8 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TourPost> getAll() {
-		String hql = "FROM TourPost AS tp ";
-		return entityManager.createQuery(hql).getResultList();
+		String hql = "FROM TourPost AS tp WHERE tp.deleted = ?";
+		return entityManager.createQuery(hql).setParameter(1, 0).getResultList();
 	}
 
 	@Override
@@ -46,20 +47,17 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 			if(object.getDeleted() != 0 || object.getDeleted() != 1 ) {
 				tp.setDeleted(object.getDeleted());
 			}
-			
 			tp.setDescription(object.getDescription());
 			tp.setDuration(object.getDuration());
-			tp.setStartPlaceID(object.getStartPlaceID());
-			tp.setEndPlaceID(object.getEndPlaceID());
+			
+			tp.setStartPlace(new Place(object.getStartPlaceID()));
+			tp.setEndPlace(new Place(object.getStartPlaceID()));
+			
 			tp.setTourArticleTitle(object.getTourArticleTitle());
 			tp.setUpdateTime(object.getUpdateTime());
 			tp.setPostViewNumber(object.getPostViewNumber());
-			tp.setNote(object.getNote());
-			tp.setPrepare(object.getPrepare());
-			tp.setType(object.getType());
-			tp.setReferenceLink(object.getReferenceLink());
-			tp.setStartTime(object.getStartTime());
 			tp.setCategory(object.getCategory());
+			
 			entityManager.flush();	
 		}
 	}
@@ -87,8 +85,9 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 		}
 		return (TourPost)list.get(0);
 	}
-
-
+	
+	
+	//Search by Account name
 	@Override
 	public List<TourPost> getAllTourPostByAccountName(String userName) {
 		String hql = "select tp from TourPost tp join  tp.account ta where  ta.name like :userName";
@@ -99,25 +98,50 @@ public class TourPostDAOImpl implements ICommonDAO<TourPost>, ITourPostDAO<TourP
 		return list;
 	}
 
+	//Search by Duration
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TourPost> getAllTourPostByDuration(int duration) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.duration = ?";
+		String hql = "FROM TourPost tp WHERE tp.deleted = ? AND tp.duration = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, duration).getResultList();
 	}
 
+	//Search by Place
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TourPost> getAllTourPostByPlace(String place) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.place1 = ? ";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,place).getResultList();
+	public List<TourPost> getAllTourPostByPlace(String place1, String place2) {
+		
+		
+		String hql = "Select tp from TourPost tp join tp.startPlace sp join tp.endPlace ep"
+										+ " where tp.deleted  = :deleted and (sp.name like :place1 or ep.name like :place2)";
+		
+		
+		//http://localhost:8080/tours/post/place/?place1=H&place2=h
+		List list = entityManager.createQuery(hql).setParameter("place1","%" + place1 + "%").
+				setParameter("place2","%" + place2 + "%").setParameter("deleted",0).getResultList();
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 
+	//Search by title
 	@Override
 	public List<TourPost> getAllTourPostByTitle(String title) {
-		String hql = "FROM TourPost as tp WHERE tp.deleted = ? AND tp.tourArticleTitle like ?";
+		String hql = "FROM TourPost tp WHERE tp.deleted = ? AND tp.tourArticleTitle like ?";
 		@SuppressWarnings("unchecked")
 		List<TourPost> list = entityManager.createQuery(hql).setParameter(1, 0).setParameter(2,"%" + title +"%").getResultList();
+		return list;
+	}
+
+	//Search by category
+	@Override
+	public List<TourPost> getAllTourPostByCategory(String name) {
+		String hql = "Select tp from TourPost tp join tp.category  ct where ct.name like :name";
+		List list = entityManager.createQuery(hql).setParameter("name","%" + name + "%").getResultList();
+		if(list.isEmpty()) {
+			return null;
+		}
 		return list;
 	}
 }

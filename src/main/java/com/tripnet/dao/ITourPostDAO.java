@@ -14,9 +14,10 @@ public interface ITourPostDAO<TourPost> {
 	 
 	 public List<TourPost> getAllTourPostByDuration(int duration);
 	 
-	 public List<TourPost> getAllTourPostByPlace(String place);
+	 public List<TourPost> getAllTourPostByPlace(String place1, String place2);
 	 
 	 public List<TourPost> getAllTourPostByTitle(String title);
 	 
+	 public List<TourPost> getAllTourPostByCategory(String name);
 	 
 }

@@ -32,12 +32,7 @@ public class ReportTourPost {
 	private String updateTime;
 	@Column(name = "Reason_Report")
 	private String reasonReport;
-	public String getReasonReport() {
-		return reasonReport;
-	}
-	public void setReasonReport(String reasonReport) {
-		this.reasonReport = reasonReport;
-	}
+	
 	public int getId() {
 		return id;
 	}
@@ -81,6 +76,11 @@ public class ReportTourPost {
 		this.updateTime = updateTime;
 	}
 	
-	
+	public String getReasonReport() {
+		return reasonReport;
+	}
+	public void setReasonReport(String reasonReport) {
+		this.reasonReport = reasonReport;
+	}
 	
 }

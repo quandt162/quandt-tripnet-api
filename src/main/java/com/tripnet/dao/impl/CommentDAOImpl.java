@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tripnet.dao.ICommentDAO;
 import com.tripnet.dao.ICommonDAO;
 import com.tripnet.enties.Comment;
-import com.tripnet.enties.Marking;
 
 @Transactional
 @Repository
@@ -55,12 +54,6 @@ public class CommentDAOImpl implements ICommonDAO<Comment>, ICommentDAO<Comment>
 	public List<Comment> getAllCommentByTour(int tourPostID) {
 		String hql = "FROM Comment AS c WHERE c.deleted = ? AND c.tourPostID = ?";
 		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, tourPostID).getResultList();
-	}
-
-	@Override
-	public int getNumberCommentOfPost(int postID) {
-		String hql = "FROM Comment as c WHERE c.deleted = ? AND c.tourPostID = ?";
-		return entityManager.createQuery(hql).setParameter(1, 0).setParameter(2, postID).getResultList().size();
 	}
 
 }

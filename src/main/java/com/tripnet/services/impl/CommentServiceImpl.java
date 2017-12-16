@@ -54,9 +54,4 @@ public class CommentServiceImpl implements ICommonService<Comment>, ICommentServ
 		return commentDAO.getAllCommentByTour(tourPostID);
 	}
 
-	@Override
-	public int getNumberCommentOfPost(int postID) {
-		return commentDAO.getNumberCommentOfPost(postID);
-	}
-
 }

@@ -1,6 +1,5 @@
 package com.tripnet.enties;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,38 +13,39 @@ import javax.persistence.Table;
  * */
 
 @Entity
-@Table(name = "likes")
-public class Like implements Serializable {
+@Table(name = "category")
+public class Category {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Id")
 	private int Id;
-	@Column(name = "Tour_Post_ID")
-	private int tourPostID;
-	@Column(name = "Like_By_ID")
-	private int likeByID;
+	@Column(name = "Description")
+	private String description;
+	@Column(name = "Type")
+	private int type;
 	@Column(name = "Deleted")
 	private int deleted;
-	@Column(name = "Created_Time")
-	private String createTime;
+	@Column(name = "Name")
+	private String name;
+	
 	public int getId() {
 		return Id;
 	}
 	public void setId(int id) {
 		Id = id;
 	}
-	public int getTourPostID() {
-		return tourPostID;
+	public String getDescription() {
+		return description;
 	}
-	public void setTourPostID(int tourPostID) {
-		this.tourPostID = tourPostID;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public int getLikeByID() {
-		return likeByID;
+	public int getType() {
+		return type;
 	}
-	public void setLikeByID(int likeByID) {
-		this.likeByID = likeByID;
+	public void setType(int type) {
+		this.type = type;
 	}
 	public int getDeleted() {
 		return deleted;
@@ -53,11 +53,10 @@ public class Like implements Serializable {
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getName() {
+		return name;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
 }
